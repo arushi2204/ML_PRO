@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 import math
 
-
+facehaar=cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
 cap = cv2.VideoCapture(0)
 while(cap.isOpened()):
     # read image
@@ -97,6 +97,12 @@ while(cap.isOpened()):
         cv2.putText(img,"2", (0, 50), cv2.FONT_HERSHEY_SIMPLEX, 2, (0, 0, 255), 3, cv2.LINE_AA)
     elif count_defects == 2:
         cv2.putText(img, "3", (5, 50), cv2.FONT_HERSHEY_SIMPLEX, 2, (0, 0, 255), 3, cv2.LINE_AA)
+        face_only=facehaar.detectMultiScale(img,1.15,5)
+        print(face_only)
+        if len(face_only)==1:
+            cv2.imwrite('opencv.png',img)
+        for x,y,w,h in face_only:
+            cv2.rectangle(img,(x,y),(x+w,y+h),(0,0,255),2)
     elif count_defects == 3:
         cv2.putText(img,"4", (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 2, (0, 0, 255), 3, cv2.LINE_AA)
     elif count_defects == 4:
