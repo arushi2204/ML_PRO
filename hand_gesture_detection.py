@@ -99,7 +99,7 @@ while(cap.isOpened()):
         cv2.putText(img, "3", (5, 50), cv2.FONT_HERSHEY_SIMPLEX, 2, (0, 0, 255), 3, cv2.LINE_AA)
         face_only=facehaar.detectMultiScale(img,1.15,5)
         print(face_only)
-        if len(face_only)==1:
+        if len(face_only)==3:
             cv2.imwrite('opencv.png',img)
         for x,y,w,h in face_only:
             cv2.rectangle(img,(x,y),(x+w,y+h),(0,0,255),2)
